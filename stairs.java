@@ -8,7 +8,7 @@ class Stairs
             {
                 System.out.print("#");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 }
