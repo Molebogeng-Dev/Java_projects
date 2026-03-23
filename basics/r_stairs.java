@@ -1,3 +1,5 @@
+package basics;
+
 class r_Stairs
 {
     public static void main(String args[]) 

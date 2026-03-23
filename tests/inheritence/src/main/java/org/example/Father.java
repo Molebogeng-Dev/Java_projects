@@ -7,16 +7,22 @@ public class Father {
     private final String surname;
     private boolean children;
     private static int numberOfChildren;
-    private final double estate;
+    private float shares = 100;
 
-    //Constructor
-    Father(String name, String surname, boolean children, int numberOfChildren, double estate){
-        this.valid();
+    //Parent Constructor
+    Father(String name, String surname){
         this.name = name;
         this.surname = surname;
-        this.children = children;
-        Father.numberOfChildren = numberOfChildren;
-        this.estate = estate;
+        if(Father.numberOfChildren > 0) this.children = true;
+        this.valid();
+    }
+    //For children Constructor
+    Father(String name, String surname, float shares){
+        this.shares -= shares;
+        this.name = name;
+        this.surname = surname;
+        this.valid();
+        Father.numberOfChildren++;
     }
     //INPUTS constructor
     Father(){
@@ -37,17 +43,20 @@ public class Father {
 
 
         System.out.print("\nNet Worth: ");
-        this.estate = input.nextDouble();
+        this.shares = input.nextFloat();
 
         input.close();
     }
-    public void valid(){
-        if(name == null || surname == null ) throw new NullPointerException("Cannot be null!");
+
+    private void valid(){
+        if(this.name == null || this.surname == null ) throw new NullPointerException("Cannot be null!");
+        if(this.shares < 0) System.out.println("Shares depleted");
         //Add more error handling(estate not null)
     }
 
-    public void getDetails(){
-        System.out.printf("Name: %s\nSurname: %s\nNumber of children: %d\nInheritance assets: %f\n", this.name, this.surname, Father.numberOfChildren, this.estate);
+    public String getDetails(){
+        System.out.printf("Name: %s\nSurname: %s\nNumber of children: %d\nInheritance shares: %d\n\n", this.name, this.surname, Father.numberOfChildren, Math.round(this.shares));
+        return null;
     }
 
 }

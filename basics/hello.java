@@ -1,7 +1,9 @@
+package basics;
+
 class Dumela
 {
     public static void main(String greet[])
     {
-        System.out.println("Dumela");
+        System.out.println("basics.Dumela");
     }
 }
