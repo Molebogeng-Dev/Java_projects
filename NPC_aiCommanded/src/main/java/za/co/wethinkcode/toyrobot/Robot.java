@@ -6,11 +6,12 @@ import java.util.List;
 public class Robot {
     private static final List<String> VALID_COMMANDS = Arrays.asList("off", "help", "forward");
 
-    private final Position TOP_LEFT = new Position(-100,100);
+    private final Position TOP_LEFT = new Position(-100,200);
     private final Position BOTTOM_RIGHT = new Position(100,-200);
 
-    private int positionX;
-    private int positionY;
+    public static final Position CENTRE = new Position(0,0);
+
+    private Position position;
     private Direction currentDirection;
     private String status;
     private String name;
@@ -18,9 +19,11 @@ public class Robot {
     public Robot(String name) {
         this.name = name;
         this.status = "Ready";
-        this.positionX = 0;
-        this.positionY = 0;
         this.currentDirection = Direction.NORTH;
+    }
+
+    public Position getPosition(){
+        return this.position;
     }
 
     public String getStatus() {                                                                         //<5>
@@ -100,7 +103,7 @@ public class Robot {
 
     @Override
     public String toString() {
-       return "[" + this.positionX + "," + this.positionY + "] "
+       return "[" + CENTRE.getX() + "," + CENTRE.getY() + "] "
                + "{" + this.currentDirection + "} "
                + this.name + "> " + this.status;
     }
