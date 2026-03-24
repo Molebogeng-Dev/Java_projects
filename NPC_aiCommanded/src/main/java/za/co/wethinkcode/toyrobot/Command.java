@@ -25,15 +25,16 @@ public abstract class Command {
 
     public static Command create(String instruction) {
         String[] args = instruction.toLowerCase().trim().split(" ");
-        switch (args[0]){
-            case "shutdown":
-                return new ShutdownCommand();
-            case "help":
-                return new HelpCommand();
-            case "forward":
-                return new ForwardCommand(args[1]);
-            default:
-                throw new IllegalArgumentException("Unsupported command: " + instruction);
-        }
+        return switch (args[0]) {
+            case "shutdown" -> new ShutdownCommand();
+            case "help" -> new HelpCommand();
+            case "forward" -> new ForwardCommand(args[1]);
+            default -> throw new IllegalArgumentException("Unsupported command: " + instruction);
+        };
+    }
+
+    public boolean execute(Robot target) {
+        target.setStatus("...");
+        return true;
     }
 }

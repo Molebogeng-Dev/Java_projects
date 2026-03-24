@@ -30,28 +30,16 @@ public class Robot {
         return this.status;
     }
 
+    public void setStatus(String text) {                                                                         //<5>
+        this.status = text;
+    }
+
     public Direction getCurrentDirection() {                                                               //<8>
         return this.currentDirection;
     }
 
     public boolean handleCommand(Command command) {
-        String commandName = command.getName();
-
-        switch (commandName){
-            case "off":
-                this.status = "Shutting down";
-                break;
-            case "help":
-                this.status = doHelp();
-                break;
-            case "forward":
-                String argument = command.getArgument();
-                this.status = doForward(Integer.parseInt(argument));
-                break;
-            default:
-                this.status = "I am not programmed for: " + command.getName();
-        }
-        return true;
+        return command.execute(this);
     }
 
     private String doHelp() {
@@ -66,7 +54,7 @@ public class Robot {
                 && BOTTOM_RIGHT.getY() <= newY && newY <= TOP_LEFT.getY();
     }
 
-    private boolean updatePosition(int nrSteps){
+    public boolean updatePosition(int nrSteps){
         int newX = this.position.getX();
         int newY = this.position.getY();
 
