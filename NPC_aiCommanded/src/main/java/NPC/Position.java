@@ -1,4 +1,4 @@
-package za.co.wethinkcode.toyrobot;
+package NPC;
 
 public class Position {
     private final int x;

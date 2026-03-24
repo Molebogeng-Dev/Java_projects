@@ -1,4 +1,4 @@
-package za.co.wethinkcode.toyrobot;
+package NPC;
 
 public enum Direction {
     NORTH, SOUTH, EAST, WEST

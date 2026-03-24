@@ -1,6 +1,4 @@
-package za.co.wethinkcode.toyrobot;
-
-import java.util.Locale;
+package NPC;
 
 public abstract class Command {
     private final String name;

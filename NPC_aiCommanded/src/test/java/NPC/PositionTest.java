@@ -1,7 +1,6 @@
-package za.co.wethinkcode.lms.test;
+package NPC;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.toyrobot.Position;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package za.co.wethinkcode.toyrobot;
+package NPC;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +23,7 @@ public class Robot {
     }
 
     public Position getPosition(){
+
         return this.position;
     }
 
@@ -83,5 +84,12 @@ public class Robot {
        return "[" + CENTRE.getX() + "," + CENTRE.getY() + "] "
                + "{" + this.currentDirection + "} "
                + this.name + "> " + this.status;
+    }
+
+
+    public boolean isValidCommand(String commandInput){
+        String[] args = commandInput.strip().split(" ");
+        String command = args[0].trim().toLowerCase();
+        return VALID_COMMANDS.contains(command);
     }
 }
