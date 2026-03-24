@@ -26,6 +26,7 @@ public class Position {
         return x == position.x && y == position.y;
 
     }
+
     public boolean isIn(Position topLeft, Position bottomRight) {
         boolean withinTop = y <= topLeft.getY();
         boolean withinBottom = y >= bottomRight.getY();

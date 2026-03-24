@@ -6,12 +6,12 @@ import java.util.List;
 public class Robot {
     private static final List<String> VALID_COMMANDS = Arrays.asList("off", "help", "forward");
 
-    private static int MIN_Y = -200, MAX_Y = 200;
-    private static int MIN_X = -100, MAX_X = 100;
+    private final Position TOP_LEFT = new Position(-100,100);
+    private final Position BOTTOM_RIGHT = new Position(100,-200);
 
     private int positionX;
     private int positionY;
-    private String currentDirection;
+    private Direction currentDirection;
     private String status;
     private String name;
 
@@ -20,22 +20,14 @@ public class Robot {
         this.status = "Ready";
         this.positionX = 0;
         this.positionY = 0;
-        this.currentDirection = "NORTH";
+        this.currentDirection = Direction.NORTH;
     }
 
     public String getStatus() {                                                                         //<5>
         return this.status;
     }
 
-    public int getPositionX() {                                                                         //<6>
-        return this.positionX;
-    }
-
-    public int getPositionY() {                                                                         //<7>
-        return this.positionY;
-    }
-
-    public String getCurrentDirection() {                                                               //<8>
+    public Direction getCurrentDirection() {                                                               //<8>
         return this.currentDirection;
     }
 
@@ -77,28 +69,26 @@ public class Robot {
                 "FORWARD - move forward by specified number of steps, e.g. 'FORWARD 10'";
     }
 
-
-    private boolean isPositionAllowed(int newX, int newY){
-        return MIN_X <= newX && newX <= MAX_X
-                && MIN_Y <= newY && newY <= MAX_Y;
+    private boolean isPositionAllowed(int newX, int newY) {
+        return TOP_LEFT.getX() <= newX && newX <= BOTTOM_RIGHT.getX()
+                && BOTTOM_RIGHT.getY() <= newY && newY <= TOP_LEFT.getY();
     }
 
     private boolean updatePosition(int nrSteps){
-        int newY = this.positionY;
-        int newX = this.positionX;
+        int newX = this.position.getX();
+        int newY = this.position.getY();
 
-        if ("NORTH".equals(this.currentDirection)) {
+        if(Direction.NORTH.equals(this.currentDirection)) {
             newY = newY + nrSteps;
         }
 
-        if (isPositionAllowed(newX, newY)){
-            this.positionX = newX;
-            this.positionY = newY;
+        Position newPosition = new Position(newX, newY);
+        if (newPosition.isIn(TOP_LEFT,BOTTOM_RIGHT)){
+            this.position = newPosition;
             return true;
         }
         return false;
     }
-
 
     private String doForward(int nrSteps){
         if (updatePosition(nrSteps)){
