@@ -34,22 +34,10 @@ public class Robot {
         return this.currentDirection;
     }
 
-    public boolean isValidCommand(String commandInput){
-        String[] args = commandInput.strip().split(" ");
-        String command = args[0].trim().toLowerCase();
-        return VALID_COMMANDS.contains(command);
-    }
+    public boolean handleCommand(Command command) {
+        String commandName = command.getName();
 
-    public boolean handleCommand(String commandInput){
-        if (!isValidCommand(commandInput)) {
-           this.status = "I am not programmed to: " + commandInput;
-           return false;
-        }
-
-        String[] args = commandInput.strip().split(" ");
-        String command = args[0].trim().toLowerCase();
-
-        switch (command){
+        switch (commandName){
             case "off":
                 this.status = "Shutting down";
                 break;
@@ -57,10 +45,11 @@ public class Robot {
                 this.status = doHelp();
                 break;
             case "forward":
-                this.status = doForward(Integer.parseInt(args[1]));
+                String argument = command.getArgument();
+                this.status = doForward(Integer.parseInt(argument));
                 break;
             default:
-                this.status = "I am not programmed for: " + command;
+                this.status = "I am not programmed for: " + command.getName();
         }
         return true;
     }
