@@ -5,7 +5,7 @@ public class DeviceCommand extends ValidCommands {
 
     // constructors for assigning data to my instances
     public DeviceCommand(String device, String status){
-        if( device.isBlank() || device.isEmpty() || status.isEmpty() || status.isBlank() || !validator(device,status) ){
+        if( device.isBlank() || device.equals("") || status.equals("") ){
             throw new IllegalArgumentException( "Invaild Command: [].");
         }
             this.device = device;
