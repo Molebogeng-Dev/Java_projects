@@ -1,11 +1,17 @@
-import com.google.gson.Gson;
-
+import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class SmartHubServer {
-   private String json;
+    private ServerSocket port;
+    private String json;
 
     public SmartHubServer(String json)  {
+        try (ServerSocket port = new ServerSocket(5000)){
+            port.accept();
+
+        }
+        catch (IOException e){
+
+        }
     }
 }
