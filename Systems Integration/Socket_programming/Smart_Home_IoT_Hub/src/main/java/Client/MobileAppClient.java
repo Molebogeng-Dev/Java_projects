@@ -1,6 +1,8 @@
+package Client;
+
+import Server.DeviceCommand;
 import com.google.gson.Gson;
 
-import java.net.ServerSocket;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +10,6 @@ public class MobileAppClient {
 
     public static void main(String[] args){
         DeviceCommand commands = null;
-        Gson gson = new Gson();
         ArrayList<String> responses = new ArrayList<>();
         String response;
         Scanner command = new Scanner(System.in);
@@ -31,8 +32,6 @@ public class MobileAppClient {
              commands = new DeviceCommand(responses.get(0), responses.get(1), responses.get(2) );
         }
 
-        //JSON serialization
-        String serialized = gson.toJson(commands);
 
 
 

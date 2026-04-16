@@ -1,3 +1,5 @@
+package Server;
+
 public abstract class ValidCommands {
 
     // validating if the user input is valid or not
