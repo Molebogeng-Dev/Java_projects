@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class MobileAppClient {
 
     public static void main(String[] args) throws IOException {
+        
         //initializing a socket so it can send to server
-        final Socket client = new Socket("127.0.0.1",8081);
+        Socket client = new Socket("localhost",7777);
         DeviceCommand commands = null;
         String response;
         Scanner command = new Scanner(System.in);
@@ -25,7 +26,7 @@ public class MobileAppClient {
             for (String deviceCommand : new String[]{"device", "status", "percentage if applicable"}) {
 
                 if (deviceCommand.equals("percentage if applicable")){
-                    System.out.println("\"Enter a " + deviceCommand + "(Or press enter if no value): ");
+                    System.out.print("\"Enter a " + deviceCommand + "(Or press enter if no value): ");
                 }
                 else {
                     System.out.print("Enter a " + deviceCommand + ": ");
@@ -49,8 +50,8 @@ public class MobileAppClient {
             String jCommands = json.toJson(commands);
 
             //back and forth communication from the server and app
+            System.out.println("Converted to json: "+jCommands);
             new HubWorkerThread(jCommands, client);
-            new SmartHubServer(commands.response());
 
 
             command.close();

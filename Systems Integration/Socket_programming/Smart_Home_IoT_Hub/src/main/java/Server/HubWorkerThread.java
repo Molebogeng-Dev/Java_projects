@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class HubWorkerThread {
     private Scanner receiver;
     private PrintWriter sender;
+    private static int num;
 
     public HubWorkerThread(String commands , Socket user)  {
 
@@ -17,10 +18,9 @@ public class HubWorkerThread {
             sender = new PrintWriter(user.getOutputStream());
 
             // Sending and receiving information from the server to client or vice versa
-            while (commands != null) {
-                sender.println(commands);
-                receiver.nextLine();
-            }
+            sender.println(commands);
+            receiver.nextLine();
+
 
 
             //Close to avoid memory leak

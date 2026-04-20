@@ -1,6 +1,6 @@
 package Server;
 
-public abstract class ValidCommands {
+public abstract class ValidCommands  {
 
     private String device;
     private String status;
