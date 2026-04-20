@@ -1,11 +1,8 @@
 package Client;
 
-import Server.HubWorkerThread;
 import Server.DeviceCommand;
-import Server.SmartHubServer;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -53,6 +50,7 @@ public class MobileAppClient {
 
             //back and forth communication from the server to app and vise versa
             PrintWriter push = new PrintWriter(client.getOutputStream());
+            push.println(jCommands);
             push.flush();
 
             Scanner pull = new Scanner(client.getInputStream());

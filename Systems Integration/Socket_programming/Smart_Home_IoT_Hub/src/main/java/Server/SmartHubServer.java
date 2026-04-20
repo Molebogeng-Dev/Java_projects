@@ -4,20 +4,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SmartHubServer extends ValidCommands{
-    static Socket serverPort;
-
+public class SmartHubServer{
     //To run the server first
-    public void main(String[] args){
+    public static void main(String[] args){
        try (ServerSocket port = new ServerSocket(7777)) {
 
            //starting server listening
            System.out.println("Server up and running...");
            while (true) {
-               serverPort = port.accept();
-               //server sending data to a connector
-
-               new Thread(new HubWorkerThread(serverResponse(), serverPort)).start();
+               //server sending data to a server connector
+               new Thread(new HubWorkerThread( port.accept() ) ).start();
            }
 
        }
@@ -25,6 +21,5 @@ public class SmartHubServer extends ValidCommands{
            throw new RuntimeException("Server could not connect");
        }
     }
-
 
 }

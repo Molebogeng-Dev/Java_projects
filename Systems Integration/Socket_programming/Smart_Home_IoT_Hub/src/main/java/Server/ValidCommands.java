@@ -41,8 +41,7 @@ public abstract class ValidCommands  {
             return "Device selected: " + device + " . The status of the device is: " + status + ".";
         }
         else {
-            return "CON NOT LOCATE THE FOLLOWING:\n" +
-                    "Device selected: " + device + " . The status of the device is: " + status + ". Percentage: "+percent+".";
+            return "CAN NOT LOCATE THE FOLLOWING:\n Device selected: " + device + " . The status of the device is: " + status + ". Percentage: "+percent+".";
         }
 
     }
