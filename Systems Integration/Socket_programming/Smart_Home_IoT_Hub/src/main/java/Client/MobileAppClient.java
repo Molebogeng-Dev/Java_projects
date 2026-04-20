@@ -1,6 +1,8 @@
 package Client;
 
+import Server.Server;
 import Server.DeviceCommand;
+import Server.SmartHubServer;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -10,15 +12,14 @@ import java.util.ArrayList;
 
 public class MobileAppClient {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+        //initializing a socket so it can send to server
+        final Socket client = new Socket("127.0.0.1",8081);
         DeviceCommand commands = null;
         String response;
         Scanner command = new Scanner(System.in);
         ArrayList<String> responses = new ArrayList<>();
 
-        try {
-            //initializing a socket so it can send to server
-            Socket app = new Socket("127.0.0.1", 8081);
 
             //getting input from user
             for (String deviceCommand : new String[]{"device", "status", "percentage if applicable"}) {
@@ -43,14 +44,17 @@ public class MobileAppClient {
                 commands = new DeviceCommand(responses.get(0), responses.get(1), responses.get(2));
             }
 
+            //converting object to a json file to send it to server
+            Gson json = new Gson();
+            String jCommands = json.toJson(commands);
+
             //back and forth communication from the server and app
-            new Communicator(app,commands);
+            new Server(jCommands, client);
+            new SmartHubServer(commands.response());
 
 
             command.close();
-        } catch (IOException e) {
-            System.out.println("App could not connect to server!");
-        }
+
     }
 }
 
