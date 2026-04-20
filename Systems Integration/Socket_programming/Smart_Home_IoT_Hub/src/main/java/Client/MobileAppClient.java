@@ -1,6 +1,6 @@
 package Client;
 
-import Server.Server;
+import Server.HubWorkerThread;
 import Server.DeviceCommand;
 import Server.SmartHubServer;
 import com.google.gson.Gson;
@@ -49,7 +49,7 @@ public class MobileAppClient {
             String jCommands = json.toJson(commands);
 
             //back and forth communication from the server and app
-            new Server(jCommands, client);
+            new HubWorkerThread(jCommands, client);
             new SmartHubServer(commands.response());
 
 

@@ -15,7 +15,7 @@ public class SmartHubServer implements Runnable{
         try (ServerSocket port = new ServerSocket(8081)) {
 
             //port listening and sending data to a connector
-            new Server(json, port.accept());
+            new HubWorkerThread(json, port.accept());
 
         } catch (IOException e) {
             throw new RuntimeException( "Server disconnected!" );
