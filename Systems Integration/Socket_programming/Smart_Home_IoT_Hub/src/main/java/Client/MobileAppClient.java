@@ -5,7 +5,9 @@ import Server.DeviceCommand;
 import Server.SmartHubServer;
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -49,12 +51,16 @@ public class MobileAppClient {
             Gson json = new Gson();
             String jCommands = json.toJson(commands);
 
-            //back and forth communication from the server and app
-            System.out.println("Converted to json: "+jCommands);
-            new HubWorkerThread(jCommands, client);
+            //back and forth communication from the server to app and vise versa
+            PrintWriter push = new PrintWriter(client.getOutputStream());
+            push.flush();
 
+            Scanner pull = new Scanner(client.getInputStream());
+            System.out.println(pull.nextLine());
 
             command.close();
+            pull.close();
+            push.close();
 
     }
 }

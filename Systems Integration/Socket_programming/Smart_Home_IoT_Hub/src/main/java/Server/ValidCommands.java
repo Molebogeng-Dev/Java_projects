@@ -33,7 +33,7 @@ public abstract class ValidCommands  {
     }
 
     //Response from server
-    public String response (){
+    public String serverResponse(){
         if (this.validator(this.device,this.status) && this.validator(this.percent) && !this.percent.equals("Not applicable")){
             return "Device selected: " + device + " . The status of the device is: " + status + ". Percentage: "+percent+".";
         }
