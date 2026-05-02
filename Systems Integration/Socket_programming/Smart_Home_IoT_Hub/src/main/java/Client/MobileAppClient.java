@@ -28,6 +28,7 @@ public class MobileAppClient {
                             System.out.println(response);
                         }
                         //App logic
+                        //...
 
                     } else {
                         connected--;
