@@ -26,8 +26,8 @@ public class HubWorkerThread implements Runnable{
             write.println("Successfully connected to server");
             write.flush();
 
-
-            //while (true) {}
+            //Back and forth communication
+            //while () {}
         } catch (IOException e) {
             System.out.println("Server Disconnected!");
             System.exit(1);

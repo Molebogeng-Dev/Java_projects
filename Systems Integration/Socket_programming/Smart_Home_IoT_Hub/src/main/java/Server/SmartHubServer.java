@@ -11,8 +11,8 @@ public class SmartHubServer {
         try (ServerSocket server = new ServerSocket(5555)){
 
             //Server connected and listening
-            Socket workingServer = server.accept();
             System.out.println("Server up and running");
+            Socket workingServer = server.accept();
 
             //Running a thread to process multiple commands from user
             while (true){ new HubWorkerThread(workingServer); }

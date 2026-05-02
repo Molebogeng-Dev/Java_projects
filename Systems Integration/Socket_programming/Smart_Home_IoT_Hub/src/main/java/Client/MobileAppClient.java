@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class MobileAppClient {
@@ -16,7 +15,7 @@ public class MobileAppClient {
             try (Socket user = new Socket("localhost", 5555)) {
                 //Reading from a server and writing to a server
                 Scanner read = new Scanner(user.getInputStream());
-                PrintWriter send = new PrintWriter(user.getOutputStream());
+                //PrintWriter send = new PrintWriter(user.getOutputStream());
 
                 //Opening the App
                 if (args[0].trim().equalsIgnoreCase("open") && args.length == 1) {
@@ -24,25 +23,19 @@ public class MobileAppClient {
                     //Server's connection response.
                     String response = read.nextLine();
                     if (response.toLowerCase().contains("successful")) {
-                        while (response != null) {
+                        //while (response != null) {
                             System.out.println(response);
-                        }
+                        //}
                         //App logic
                         //...
 
                     } else {
                         connected--;
-
-                        //the below cannot be a response from server because it is not connected
+                        //the below can not be a response from server because it is not connected
                         System.out.println("Trying to reconnect to server");
                     }
                 }
-                //Closing the App
-                else if (args[0].trim().equalsIgnoreCase("close") && args.length == 1) {
-                    //Response from Server saying closed
-                    closingConnection(read,send,user);
-
-                } else {
+                else if (!args[0].trim().equalsIgnoreCase("close") && args.length != 1) {
                     System.out.println("""
                             Incorrect Commands
                             Available Commands:
@@ -50,12 +43,20 @@ public class MobileAppClient {
                             Closing the app = close""");
                     System.exit(2);
                 }
+                //Closing the App
+                //Response from Server saying closed
+                //closingConnection(read,send,user);
+                System.exit(0);
+
             }
             catch (IOException e) {
-                System.out.println("User could not connect to server");
-                System.exit(1);
+                throw new RuntimeException();
+            }
+            catch (RuntimeException e){
+                throw new RuntimeException("User could not connect to server");
             }
         } while (connected != 0);
+        throw new RuntimeException();
         //If it fails to connect after the number of tries throw an error
     }
 
