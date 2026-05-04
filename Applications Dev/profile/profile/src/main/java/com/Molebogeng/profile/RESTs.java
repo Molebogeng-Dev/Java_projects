@@ -1,5 +1,6 @@
 package com.Molebogeng.profile;
 
+import com.Molebogeng.profile.backend.ContactMe;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,6 @@ public class RESTs {
     //simple contact me form
     @PostMapping("/contactMe")
     public String contactMe(@RequestBody ContactMe contactMe){
-
         return "Form successfully loaded";
     }
 }
