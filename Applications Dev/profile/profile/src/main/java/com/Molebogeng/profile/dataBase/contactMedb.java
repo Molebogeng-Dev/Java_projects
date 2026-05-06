@@ -2,6 +2,7 @@ package com.Molebogeng.profile.dataBase;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
@@ -9,8 +10,8 @@ import jakarta.persistence.Id;
 public class contactMedb {
 
     @Id
-    @GeneratedValue()
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     //attributes to the save on the database
     private String name;
     private String surname;
@@ -29,6 +30,9 @@ public class contactMedb {
     }
 
     //Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -43,6 +47,9 @@ public class contactMedb {
     }
 
     //Getters
+    public Long getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }

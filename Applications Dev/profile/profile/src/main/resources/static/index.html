@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Molebogeng's Website</title>
+</head>
+<body>
+
+<h1>Explore Molebogeng Lehlogonolo Selahle</h1>
+
+<!-- This is the button the user will click -->
+<button onclick="contactMe()">Submit Form</button>
+
+<!-- We will print the backend's response here -->
+<p id="response-text" style="color: orange;"></p>
+
+<script>
+    // This is JavaScript. It acts exactly like Postman!
+    function contactMe() {
+
+        // 1. We create the JSON envelope
+        const envelope = {
+            name: "Molebogeng",
+            surname: "Selahle",
+            email: "@gmail.com",
+            message: "This worked"
+        };
+
+        // 2. The 'fetch' command is the browser's built-in Postman.
+        // We tell it the address, the method (POST), and attach the envelope.
+        fetch('http://localhost:8080/contactMe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Telling Java we are sending JSON
+            },
+            body: JSON.stringify(envelope) // Converting our envelope into pure text
+        })
+        .then(response => response.text()) // Wait for the Java backend to reply
+        .then(data => {
+            // 3. Print Java's "Success!" message onto the screen
+            document.getElementById("response-text").innerText = data;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+</script>
+
+</body>
+</html>

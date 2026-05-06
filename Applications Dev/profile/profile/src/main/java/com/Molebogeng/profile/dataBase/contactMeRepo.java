@@ -1,4 +1,6 @@
 package com.Molebogeng.profile.dataBase;
 
-public interface contactMeRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface contactMeRepo extends JpaRepository<contactMedb,Long> {
 }
