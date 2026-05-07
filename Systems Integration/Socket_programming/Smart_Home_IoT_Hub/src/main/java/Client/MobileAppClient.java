@@ -1,9 +1,12 @@
 package Client;
 
+import Server.backend.DeviceCommand;
+import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -17,7 +20,7 @@ public class MobileAppClient {
                 //Reading from a server and writing to a server
                 Scanner read = new Scanner(user.getInputStream());
                 PrintWriter send = new PrintWriter(user.getOutputStream());
-
+                Gson json = new Gson();
                 //Opening the App
                 if (args[0].trim().equalsIgnoreCase("open") && args.length == 1) {
                     //Server's connection response.
@@ -30,12 +33,12 @@ public class MobileAppClient {
                             boolean status = false;
 
                             do{
-                                while ( read.nextLine() != null) {
-                                    System.out.println( read.nextLine() );
-                                }
+                                // Json deserialization so I can use Tcp method (send all the relevant data at once
+                                DeviceCommand commands = json.fromJson(read.nextLine() , DeviceCommand.class);
+                                System.out.println( commands );
+
                                 Scanner userInput = new Scanner(System.in);
                                 userInput.nextLine();
-
                                 for ( String select : new String[]{"1", "2", "3"}){
                                     if (userInput.equals(select)){
                                         send.println(userInput);
