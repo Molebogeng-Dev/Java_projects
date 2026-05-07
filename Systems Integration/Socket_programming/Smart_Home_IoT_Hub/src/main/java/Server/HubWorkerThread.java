@@ -31,7 +31,7 @@ public class HubWorkerThread implements Runnable{
             write.flush();
 
             //Back and forth communication
-            while (true) {
+            //while (true) {
                 //Send an object
                 // JSON Serialization so I can use Tcp method (send all the relevant data at once
                 DeviceCommand obj = new DeviceCommand();
@@ -40,11 +40,11 @@ public class HubWorkerThread implements Runnable{
                 write.println(commands);
                 write.flush();
 
-                System.out.println("Selected option: "+read.nextLine());
+                System.out.println("Selected option: "+read.nextInt());
 
                 write.println("Test worked");
                 write.flush();
-            }
+            //}
 
         } catch (IOException e) {
             System.out.println("Server Disconnected!");

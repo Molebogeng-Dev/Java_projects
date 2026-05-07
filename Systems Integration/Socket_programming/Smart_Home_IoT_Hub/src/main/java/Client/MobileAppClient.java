@@ -17,16 +17,18 @@ public class MobileAppClient {
         int connected = 3;
         do {
             try (Socket user = new Socket("localhost", 5555)) {
+
                 //Reading from a server and writing to a server
                 Scanner read = new Scanner(user.getInputStream());
                 PrintWriter send = new PrintWriter(user.getOutputStream());
                 Gson json = new Gson();
+
                 //Opening the App
                 if (args[0].trim().equalsIgnoreCase("open") && args.length == 1) {
+
                     //Server's connection response.
                     String intro = read.nextLine();
                     if (intro.toLowerCase().contains("connected")) {
-                        //while (response != null) {
                             System.out.println(intro);
 
                             //App start ,logic.
@@ -37,19 +39,25 @@ public class MobileAppClient {
                                 DeviceCommand commands = json.fromJson(read.nextLine() , DeviceCommand.class);
                                 System.out.println( commands );
 
+                                //App starts
+                                System.out.print("Enter a number: ");
                                 Scanner userInput = new Scanner(System.in);
-                                userInput.nextLine();
-                                for ( String select : new String[]{"1", "2", "3"}){
-                                    if (userInput.equals(select)){
-                                        send.println(userInput);
+                                int num = userInput.nextInt();
+                                for ( int select : new int[]{1, 2, 3} ){
+                                    if (select == num){
+                                        send.println(num);
+                                        send.flush();
                                         status = true;
-                                    }
-                                    else {
-                                        System.out.println("Incorrect command!");
+                                        System.out.println(read.nextLine());
+
                                     }
                                 }
+                                if (!status){
+                                    System.out.println("Incorrect command!");
+                                }
+                                userInput.close();
                             }while (!status);
-                            System.out.println("Works");
+
 
                     } else {
                         connected--;
