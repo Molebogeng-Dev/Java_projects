@@ -27,7 +27,20 @@ public class HubWorkerThread implements Runnable{
             write.flush();
 
             //Back and forth communication
-            //while () {}
+            while (true) {
+                //Send an object
+                write.println("\nSelect a number from available device\n" +
+                        "1 = tv \n" +
+                        "2 = lights \n" +
+                        "3 = fridge \n");
+                write.flush();
+
+                System.out.println("Selected option: "+read.nextLine());
+
+                write.println("Test worked");
+                write.flush();
+            }
+
         } catch (IOException e) {
             System.out.println("Server Disconnected!");
             System.exit(1);

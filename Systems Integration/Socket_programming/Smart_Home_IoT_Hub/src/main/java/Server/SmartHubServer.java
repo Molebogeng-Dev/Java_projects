@@ -14,8 +14,10 @@ public class SmartHubServer {
             System.out.println("Server up and running");
             Socket workingServer = server.accept();
 
+
             //Running a thread to process multiple commands from user
-            while (true){ new HubWorkerThread(workingServer); }
+                Thread thread = new Thread(new HubWorkerThread(workingServer));
+                thread.start();
 
         } catch (IOException e) {
             System.out.println("Server can not run!");

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class MobileAppClient {
 
@@ -15,19 +16,37 @@ public class MobileAppClient {
             try (Socket user = new Socket("localhost", 5555)) {
                 //Reading from a server and writing to a server
                 Scanner read = new Scanner(user.getInputStream());
-                //PrintWriter send = new PrintWriter(user.getOutputStream());
+                PrintWriter send = new PrintWriter(user.getOutputStream());
 
                 //Opening the App
                 if (args[0].trim().equalsIgnoreCase("open") && args.length == 1) {
-
                     //Server's connection response.
-                    String response = read.nextLine();
-                    if (response.toLowerCase().contains("successful")) {
+                    String intro = read.nextLine();
+                    if (intro.toLowerCase().contains("connected")) {
                         //while (response != null) {
-                            System.out.println(response);
-                        //}
-                        //App logic
-                        //...
+                            System.out.println(intro);
+
+                            //App start ,logic.
+                            boolean status = false;
+
+                            do{
+                                while ( read.nextLine() != null) {
+                                    System.out.println( read.nextLine() );
+                                }
+                                Scanner userInput = new Scanner(System.in);
+                                userInput.nextLine();
+
+                                for ( String select : new String[]{"1", "2", "3"}){
+                                    if (userInput.equals(select)){
+                                        send.println(userInput);
+                                        status = true;
+                                    }
+                                    else {
+                                        System.out.println("Incorrect command!");
+                                    }
+                                }
+                            }while (!status);
+                            System.out.println("Works");
 
                     } else {
                         connected--;
@@ -45,7 +64,7 @@ public class MobileAppClient {
                 }
                 //Closing the App
                 //Response from Server saying closed
-                //closingConnection(read,send,user);
+                closingConnection(read,send,user);
                 System.exit(0);
 
             }
