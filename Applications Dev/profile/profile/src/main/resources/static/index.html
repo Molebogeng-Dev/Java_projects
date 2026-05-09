@@ -39,39 +39,40 @@
 <p id="response-text" style="color: orange;"></p>
 
 <script>
-    const typedName = document.getElementById("userNameBox").value;
-        const typedSurname = document.getElementById("userSurnameBox").value;
-        const typedEmail = document.getElementById("userEmailBox").value;
-        const typedMessage = document.getElementById("userMessageBox").value;
+    function contactMe() {
+        const typedName = document.getElementById("userNameBox").value;
+            const typedSurname = document.getElementById("userSurnameBox").value;
+            const typedEmail = document.getElementById("userEmailBox").value;
+            const typedMessage = document.getElementById("userMessageBox").value;
 
-        const envelope = {
-            name: typedName,
-            surname: typedSurname,
-            email: typedEmail,
-            message: typedMessage
-        };
+            const envelope = {
+                name: typedName,
+                surname: typedSurname,
+                email: typedEmail,
+                message: typedMessage
+            };
 
-        fetch('http://localhost:8080/contactMe', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(envelope)
-        })
-        .then(response => response.text())
-        .then(data => {
-            // Print Java's "Success!" message onto the screen
-            document.getElementById("response-text").innerText = data;
+            fetch('http://localhost:8080/contactMe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(envelope)
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Print Java's "Success!" message onto the screen
+                document.getElementById("response-text").innerText = data;
 
-            // --- THE NEW TRICK: Clear the boxes! ---
-            document.getElementById("userNameBox").value = "";
-            document.getElementById("userSurnameBox").value = "";
-            document.getElementById("userEmailBox").value = "";
-            document.getElementById("userMessageBox").value = "";
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+                // --- THE NEW TRICK: Clear the boxes! ---
+                document.getElementById("userNameBox").value = "";
+                document.getElementById("userSurnameBox").value = "";
+                document.getElementById("userEmailBox").value = "";
+                document.getElementById("userMessageBox").value = "";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
     }
 </script>
 
