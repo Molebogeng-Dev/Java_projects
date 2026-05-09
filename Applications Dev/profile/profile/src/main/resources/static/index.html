@@ -6,39 +6,68 @@
 </head>
 <body>
 
-<h1>Explore Molebogeng Lehlogonolo Selahle</h1>
+<h1>Contact Molebogeng</h1>
 
-<!-- This is the button the user will click -->
+<div>
+    <label>Name:</label><br>
+    <input type="text" id="userNameBox" placeholder="Enter your name">
+</div>
+<br>
+
+<div>
+    <label>Surname:</label><br>
+    <input type="text" id="userSurnameBox" placeholder="Enter your surname">
+</div>
+<br>
+
+<div>
+    <label>Email:</label><br>
+    <input type="email" id="userEmailBox" placeholder="Enter your email">
+</div>
+<br>
+
+<div>
+    <label>Message:</label><br>
+    <textarea id="userMessageBox" placeholder="Type your message here"></textarea>
+</div>
+<br>
+
 <button onclick="contactMe()">Submit Form</button>
+
 
 <!-- We will print the backend's response here -->
 <p id="response-text" style="color: orange;"></p>
 
 <script>
-    // This is JavaScript. It acts exactly like Postman!
-    function contactMe() {
+    const typedName = document.getElementById("userNameBox").value;
+        const typedSurname = document.getElementById("userSurnameBox").value;
+        const typedEmail = document.getElementById("userEmailBox").value;
+        const typedMessage = document.getElementById("userMessageBox").value;
 
-        // 1. We create the JSON envelope
         const envelope = {
-            name: "Molebogeng",
-            surname: "Selahle",
-            email: "@gmail.com",
-            message: "This worked"
+            name: typedName,
+            surname: typedSurname,
+            email: typedEmail,
+            message: typedMessage
         };
 
-        // 2. The 'fetch' command is the browser's built-in Postman.
-        // We tell it the address, the method (POST), and attach the envelope.
         fetch('http://localhost:8080/contactMe', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Telling Java we are sending JSON
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(envelope) // Converting our envelope into pure text
+            body: JSON.stringify(envelope)
         })
-        .then(response => response.text()) // Wait for the Java backend to reply
+        .then(response => response.text())
         .then(data => {
-            // 3. Print Java's "Success!" message onto the screen
+            // Print Java's "Success!" message onto the screen
             document.getElementById("response-text").innerText = data;
+
+            // --- THE NEW TRICK: Clear the boxes! ---
+            document.getElementById("userNameBox").value = "";
+            document.getElementById("userSurnameBox").value = "";
+            document.getElementById("userEmailBox").value = "";
+            document.getElementById("userMessageBox").value = "";
         })
         .catch(error => {
             console.error("Error:", error);
