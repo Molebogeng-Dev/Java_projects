@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RestFrontend {
 
     //Simple welcome page
-    @GetMapping("/")
+    @GetMapping("/home")
     private String indexPage(){
-        return "index";
+        return "index.html";
     }
 
+    @GetMapping("/links")
+    private String linkPage(){
+        return "links.html";
+    }
 }
