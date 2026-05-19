@@ -1,17 +1,28 @@
-package com.Molebogeng.profile.backend;
+package com.Molebogeng.profile.dataBase;
 
-public class ContactMe {
-    //attributes to the form
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+@Entity
+public class contactmedb {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    //attributes to the save on the database
     private String name;
     private String surname;
     private String email;
     private String message;
 
-    //Silent constructor for spring to recognize
-    public ContactMe(){}
+    //Spring needs this empty constructor
+    public contactmedb(){}
 
     //Real constructor
-    public ContactMe(String name, String surname, String email, String message) {
+    public contactmedb(String name, String surname, String email, String message) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -19,6 +30,9 @@ public class ContactMe {
     }
 
     //Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -33,6 +47,9 @@ public class ContactMe {
     }
 
     //Getters
+    public Long getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -45,4 +62,5 @@ public class ContactMe {
     public String getMessage() {
         return message;
     }
+
 }
