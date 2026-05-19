@@ -1,4 +1,4 @@
-package com.Molebogeng.profile;
+package com.Molebogeng.profile.RESTS;
 
 import com.Molebogeng.profile.backend.Contactme;
 import com.Molebogeng.profile.dataBase.contactMeRepo;
@@ -22,7 +22,6 @@ public class RESTs {
         contactmedb form = new contactmedb(contactMe.getName(), contactMe.getSurname(), contactMe.getEmail(), contactMe.getMessage());
         //Saving to global db to repo
         repo.save(form);
-        new diplaydb(repo.findAll());
         return "Form successfully submitted";
     }
 }
