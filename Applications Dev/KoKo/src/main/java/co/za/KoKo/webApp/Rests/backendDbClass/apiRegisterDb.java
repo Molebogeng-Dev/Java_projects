@@ -1,16 +1,22 @@
 package co.za.KoKo.webApp.Rests.backendDbClass;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
 public class apiRegisterDb {
-    //@ID
-    //@GeneratedValue()
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String email;
     private String phone;
     private String password;
 
-    public apiRegisterDb(long id, String name, String email, String phone, String password){
-        this.id =id;
+    public apiRegisterDb(String name, String email, String phone, String password){
         this.name=name;
         this.email=email;
         this.phone=phone;
@@ -37,7 +43,7 @@ public class apiRegisterDb {
     }
 
     //Getters
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public String getName() {

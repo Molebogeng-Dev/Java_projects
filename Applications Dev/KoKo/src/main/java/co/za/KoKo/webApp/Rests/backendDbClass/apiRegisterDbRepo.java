@@ -1,4 +1,6 @@
 package co.za.KoKo.webApp.Rests.backendDbClass;
 
-public interface apiRegisterDbRepo extends JPARepository<apiRegisterDb,long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface apiRegisterDbRepo extends JpaRepository<apiRegisterDb, Long> {
 }
