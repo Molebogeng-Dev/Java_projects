@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+.app-theme {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2d6a4f, #f4a261);
+}
+
+#intro {
+      text-align: center;
+}
+
+#map {
+    border-radius: 12px
+}
+
 :root {
   --green: #2d6a4f;
   --green-light: #52b788;

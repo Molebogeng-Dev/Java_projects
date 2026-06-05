@@ -4,12 +4,13 @@ let map;
 let userMarker;
 
 function initMap() {
-  // Default center: Limpopo, South Africa
-  map = L.map('map').setView([-23.9, 29.4], 8);
+  // Default location
+  map = L.map('map').setView([-26.1550, 28.3840], 12);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 20}).addTo(map);
 
   map.on('click', function(e) {
     const { lat, lng } = e.latlng;

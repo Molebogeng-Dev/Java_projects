@@ -6,13 +6,7 @@
   <title>KoKo — Login</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    .login-wrapper {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #2d6a4f, #f4a261);
-    }
+    
     .login-box {
       background: white;
       border-radius: 16px;
@@ -32,10 +26,12 @@
   </style>
 </head>
 <body>
-  <div class="login-wrapper">
+  <div class="app-theme">
     <div class="login-box">
-      <h1> KoKo</h1>
-      <p>Connecting rural communities to local businesses</p>
+      <div id="intro">
+        <h1> KoKo</h1>
+        <p>Connecting rural communities to local businesses</p>
+      </div>
 
       <div class="tabs">
         <div class="tab active" onclick="showTab('login', event)">Sign In</div>
